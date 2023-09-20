@@ -18,3 +18,12 @@ def show(id):
   except:
     raise exceptions.NotFound("Couldn't find team")
 
+def create():
+  try:
+    name, nation, tier = request.json.values()
+    new_team = Team(name, nation, tier)
+    db.session.add(new_team)
+    db.session.commit()
+    return jsonify({"data": new_team.json}), 201
+  except:
+    raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
