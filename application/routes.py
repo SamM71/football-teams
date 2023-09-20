@@ -2,7 +2,7 @@ from flask import jsonify, request
 from werkzeug import exceptions
 from application import app, db
 from application.models import Team
-from .controllers import index, show, create
+from .controllers import index, show, create, update
 
 @app.route("/")
 def hello_world():
@@ -21,3 +21,5 @@ def handle_teams():
 def handle_team(id):
   if request.method == "GET":
     return show(id)
+  if request.method == "PATCH":
+    return update(id)

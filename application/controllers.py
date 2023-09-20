@@ -27,3 +27,17 @@ def create():
     return jsonify({"data": new_team.json}), 201
   except:
     raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
+  
+def update(id):
+  try:
+    data = request.json
+    team = Team.query.filter_by(id=id).first()
+
+    for (attribute, value) in data.items():
+      if hasattr(team, attribute):
+        setattr(team, attribute, value)
+
+    db.session.commit()
+    return jsonify({"data": team.json})
+  except:
+    raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
