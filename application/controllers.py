@@ -41,3 +41,12 @@ def update(id):
     return jsonify({"data": team.json})
   except:
     raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
+  
+def delete(id):
+  try:
+    team = Team.query.filter_by(id=id).first()
+    db.session.delete(team)
+    db.session.commit()
+    return f"Team deleted"
+  except:
+    raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
