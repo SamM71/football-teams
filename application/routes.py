@@ -25,3 +25,15 @@ def handle_team(id):
     return update(id)
   if request.method == "DELETE":
     return delete(id)
+  
+@app.errorhandler(exceptions.NotFound)
+def handle_404(err):
+  return jsonify({"error": f"{err}"}), 404
+
+@app.errorhandler(exceptions.InternalServerError)
+def handle_500(err):
+  return jsonify({"error": f"{err}"}), 500
+
+@app.errorhandler(exceptions.BadRequest)
+def handle_404(err):
+  return jsonify({"error": f"{err}"}), 400

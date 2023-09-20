@@ -38,7 +38,7 @@ def update(id):
         setattr(team, attribute, value)
 
     db.session.commit()
-    return jsonify({"data": team.json})
+    return jsonify({"data": team.json}), 200
   except:
     raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
   
@@ -47,6 +47,6 @@ def delete(id):
     team = Team.query.filter_by(id=id).first()
     db.session.delete(team)
     db.session.commit()
-    return f"Team deleted"
+    return f"Team deleted", 200
   except:
     raise exceptions.BadRequest(f"Sorry, we cannot process your request.")
