@@ -1,7 +1,6 @@
 from flask import jsonify, request
 from werkzeug import exceptions
-from application import app, db
-from application.models import Team
+from application import app
 from .controllers import index, show, create, update, delete
 
 @app.route("/")
