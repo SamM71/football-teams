@@ -10,3 +10,11 @@ def index():
     return jsonify({"teams": data})
   except:
     raise exceptions.NotFound("Couldn't find any teams")
+  
+def show(id):
+  try:
+    team = Team.query.filter_by(id=id).first()
+    return jsonify({"data": team.json}), 200
+  except:
+    raise exceptions.NotFound("Couldn't find team")
+
